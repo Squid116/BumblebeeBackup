@@ -31,6 +31,12 @@ refresh_interval = 168
 [file_manager]
 enable_object_processing = True
 
+[timelapse]
+
+[spoolman]
+server = http://10.1.1.81:7912
+sync_rate = 5
+
 [update_manager mainsail-config]
 type = git_repo
 primary_branch = master
@@ -84,24 +90,6 @@ origin = https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging.git
 managed_services = klipper
 primary_branch = main
 
-[update_manager led_effect]
-type = git_repo
-path = ~/klipper-led_effect
-origin = https://github.com/julianschill/klipper-led_effect.git
-is_system_service = False
-
-[update_manager happy-hare]
-type = git_repo
-path = ~/Happy-Hare
-origin = https://github.com/moggieuk/Happy-Hare.git
-primary_branch = main
-install_script = install.sh
-managed_services = klipper
-
-[mmu_server]
-enable_file_preprocessor = True
-enable_toolchange_next_pos = True
-
 [update_manager nevermore]
 type = git_repo
 path = ~/nevermore-controller
@@ -113,9 +101,41 @@ managed_services = klipper
 [update_manager KlipperScreen]
 type = git_repo
 path = ~/KlipperScreen
-origin = https://github.com/moggieuk/KlipperScreen-Happy-Hare-Edition.git
-env = ~/.KlipperScreen-env/bin/python
+origin = https://github.com/KlipperScreen/KlipperScreen.git
+virtualenv = ~/.KlipperScreen-env
 requirements = scripts/KlipperScreen-requirements.txt
-install_script = scripts/KlipperScreen-install.sh
+system_dependencies = scripts/system-dependencies.json
 managed_services = KlipperScreen
+
+[update_manager moonraker-obico]
+type = git_repo
+path = /home/chris/moonraker-obico
+origin = https://github.com/TheSpaghettiDetective/moonraker-obico.git
+env = /home/chris/moonraker-obico/../moonraker-obico-env/bin/python
+requirements = requirements.txt
+install_script = install.sh
+managed_services = 
+	moonraker-obico
+
+[update_manager crowsnest]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+
+[update_manager timelapse]
+type = git_repo
+primary_branch = main
+path = ~/moonraker-timelapse
+origin = https://github.com/mainsail-crew/moonraker-timelapse.git
+managed_services = klipper moonraker
+
+[update_manager afc-software]
+type = git_repo
+path = ~/AFC-Klipper-Add-On
+origin = https://github.com/ArmoredTurtle/AFC-Klipper-Add-On.git
+managed_services = klipper
+primary_branch = main
+is_system_service = False
+info_tags = 
+	desc=AFC Klipper Add On
 
