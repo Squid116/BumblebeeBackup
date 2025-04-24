@@ -16,12 +16,12 @@
             "material": "ABS",
             "spool_id": "1",
             "color": "#ffffff",
-            "weight": 766.7483997480593,
+            "weight": 741.6957026764446,
             "extruder_temp": 240,
             "runout_lane": "NONE",
             "filament_status": "Ready",
             "filament_status_led": "#00cc00",
-            "status": null
+            "status": "Loaded"
         },
         "lane2": {
             "name": "lane2",
@@ -39,12 +39,12 @@
             "material": "ABS",
             "spool_id": "2",
             "color": "#000000",
-            "weight": 996.0980389051354,
+            "weight": 979.1715720350815,
             "extruder_temp": 240,
             "runout_lane": "NONE",
             "filament_status": "Ready",
             "filament_status_led": "#00cc00",
-            "status": null
+            "status": "Loaded"
         },
         "lane3": {
             "name": "lane3",
@@ -62,12 +62,12 @@
             "material": "ABS",
             "spool_id": "3",
             "color": "#c63cce",
-            "weight": 661.8992051460457,
+            "weight": 573.3370855925978,
             "extruder_temp": 240,
             "runout_lane": "NONE",
             "filament_status": "Ready",
             "filament_status_led": "#00cc00",
-            "status": null
+            "status": "Loaded"
         },
         "lane4": {
             "name": "lane4",
@@ -85,7 +85,7 @@
             "material": "ABS",
             "spool_id": "4",
             "color": "#8bf5c9",
-            "weight": 377.6305791107643,
+            "weight": 275.83801192967894,
             "extruder_temp": 240,
             "runout_lane": "NONE",
             "filament_status": "In Tool",
