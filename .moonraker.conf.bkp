@@ -34,7 +34,7 @@ enable_object_processing = True
 [timelapse]
 
 [spoolman]
-server = http://10.1.1.81:7912
+server = http://voron.local:7912
 sync_rate = 5
 
 [update_manager mainsail-config]
