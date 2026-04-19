@@ -1,4 +1,4 @@
-[gcode_macro AFC_BRUSH]
+[gcode_macro AFC_BRUSH_BOTH]
 description: Wipe the nozzle on the brush
 gcode:
     {% set gVars             = printer['gcode_macro _AFC_GLOBAL_VARS'] %}
@@ -17,6 +17,9 @@ gcode:
     {% set z_move            = vars['z_move']           | default(-1)        | float %}
     {% set tool_servo_enable = vars['tool_servo_enable']|default(false)      | lower == 'true' %}
 
+
+    M400  #clear all moves in queue - prevents possible TTC errors
+    
     # Get printer bounds to make sure none of our cleaning moves fall outside of them
     # Check for IDEX
     {% if printer.dual_carriage is defined %}
@@ -108,17 +111,29 @@ gcode:
         RESPOND TYPE=command MSG='AFC_Brush: X Brush Moves'
     {% endif %}
     {% for wipe in range(brush_count) %}
+
+        {% set random_y_max = brush_y_max %}
+        {% if random_y_max >= y_max %}
+          {% set random_y_max = y_max %}
+        {% endif %}
+        
         {% if brush_x_min >= x_min %}
-              G1 X{brush_x_min} F{brush_clean_speed}
+              {% set random_y_location = (range((brush_y_min * 100) | int, ((random_y_max  * 100) + 1) | int) | random) / 100 %}
+              G1 X{brush_x_min} Y{random_y_location} F{brush_clean_speed}
         {% endif %}
             
         {% if brush_x_max <= x_max %}
-              G1 X{brush_x_max} F{brush_clean_speed}
+              {% set random_y_location = (range((brush_y_min * 100) | int, ((random_y_max  * 100) + 1) | int) | random) / 100 %}
+              G1 X{brush_x_max} Y{random_y_location} F{brush_clean_speed}
         {% endif %}
             
         G1 X{Bx} F{brush_clean_speed}
+
+        M400  #clear all moves in queue - prevents possible TTC errors
             
     {% endfor %}
+
+    
 
     {% if z_move >= 0 %}
       {% if verbose > 1 %}
@@ -144,7 +159,6 @@ gcode:
     SET_VELOCITY_LIMIT ACCEL={saved_accel}
 
     AFC_ENABLE_SKEW
-    M400
 
 #--=================================================================================-
 #------- Helper macro for brush servo -----------------------------------------------
